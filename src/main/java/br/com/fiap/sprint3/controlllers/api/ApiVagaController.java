@@ -26,10 +26,10 @@ public class ApiVagaController {
     @GetMapping
     @Cacheable("vagas")
     public Page<Vaga> listar(@RequestParam(required = false) String andar, @PageableDefault Pageable pageable){
-        if (andar.isEmpty()){
+        if (andar == null){
             return repository.findAll(pageable);
         }
-        return repository.findAllByAndar(andar, pageable);
+        return repository.findAllByAndarEquals(andar, pageable);
     }
 
     @PostMapping
@@ -47,7 +47,8 @@ public class ApiVagaController {
 
 
     @PostMapping("/{id}")
-    public ResponseEntity<Vaga> atualizarStatus(@Param("id") Long id){
+    public ResponseEntity<Vaga> atualizarStatus(@PathVariable("id") Long id){
+        System.out.println(id);
         Optional<Vaga> optional = repository.findById(id);
         if (optional.isEmpty()){
             return ResponseEntity.notFound().build();

@@ -5,5 +5,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface VagaRepository extends JpaRepository<Vaga, Long>{
-    public Page<Vaga> findAllByAndar(String andar, Pageable pageable);
+    public Page<Vaga> findAllByAndarEquals(String andar, Pageable pageable);
 }
